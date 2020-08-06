@@ -1,7 +1,9 @@
 package com.cognizant.garage.web.service;
 
 import com.cognizant.garage.business.domain.response.WarehouseResponse;
+import com.cognizant.garage.business.service.MetricService;
 import com.cognizant.garage.business.service.WarehouseService;
+import com.cognizant.garage.web.filter.MetricFilter;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
@@ -31,6 +33,10 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 public class WarehouseServiceControllerTest {
     @MockBean
     private WarehouseService warehouseService;
+    
+
+    @MockBean
+    private MetricService metricService;
 
     @Autowired
     private MockMvc mvc;
