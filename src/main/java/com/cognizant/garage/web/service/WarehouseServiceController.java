@@ -32,8 +32,8 @@ public class WarehouseServiceController {
     }
 
     @PostMapping
-    public ResponseEntity<Warehouse> saveWarehouse(@RequestBody WarehouseRequest warehouseRequest) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(warehouseService.saveWarehouse(warehouseRequest));
+    public ResponseEntity<Warehouse> addWarehouse(@RequestBody WarehouseRequest warehouseRequest) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(warehouseService.addWarehouse(warehouseRequest));
     }
 
     @PutMapping("/{id}")

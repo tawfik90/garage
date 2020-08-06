@@ -29,4 +29,10 @@ public class VehicleResponse extends VehicleDTO {
     @JsonDeserialize(using = LocalDateDeserializer.class)
     final private LocalDate dateAdded;
 
+    public VehicleResponse(String make, String model, Integer yearModel, Double price, Boolean licensed, Integer _id, LocalDate dateAdded) {
+        super(make, model, yearModel, price, licensed);
+        this._id = _id;
+        this.dateAdded = dateAdded;
+    }
+
 }

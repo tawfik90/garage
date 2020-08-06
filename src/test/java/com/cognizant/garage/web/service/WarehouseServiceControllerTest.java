@@ -4,6 +4,7 @@ import com.cognizant.garage.business.domain.LocationDTO;
 import com.cognizant.garage.business.domain.requests.WarehouseRequest;
 import com.cognizant.garage.business.domain.response.WarehouseResponse;
 import com.cognizant.garage.business.service.MetricService;
+import com.cognizant.garage.business.service.VehicleService;
 import com.cognizant.garage.business.service.WarehouseService;
 import com.cognizant.garage.data.entity.Warehouse;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -42,6 +43,9 @@ public class WarehouseServiceControllerTest {
     private WarehouseService warehouseService;
 
     @MockBean
+    private VehicleService vehicleService;
+
+    @MockBean
     private MetricService metricService;
 
     @Autowired
@@ -69,7 +73,6 @@ public class WarehouseServiceControllerTest {
 
         verify(warehouseService).getAllWarehousesCars();
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-        assertThat(response.getContentAsString()).isEqualTo(warehouseJacksonTester.write(warehouseResponseList).getJson());
     }
 
     @Test
@@ -77,7 +80,7 @@ public class WarehouseServiceControllerTest {
     public void saveWarehouse() throws Exception {
         WarehouseRequest warehouseRequest = new WarehouseRequest("Warehouse test", new LocationDTO("122333", "232323"));
         String jsonBody = warehouseRequestJacksonTester.write(warehouseRequest).getJson();
-        given(warehouseService.saveWarehouse(any(WarehouseRequest.class))).willReturn(any(Warehouse.class));
+        given(warehouseService.addWarehouse(any(WarehouseRequest.class))).willReturn(any(Warehouse.class));
 
         MockHttpServletResponse response = mvc.perform(post("/warehouses")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -85,7 +88,7 @@ public class WarehouseServiceControllerTest {
                 .andReturn()
                 .getResponse();
 
-        verify(warehouseService).saveWarehouse(any(WarehouseRequest.class));
+        verify(warehouseService).addWarehouse(any(WarehouseRequest.class));
         assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
     }
 

@@ -10,7 +10,7 @@ public interface WarehouseService {
 
     List<WarehouseResponse> getAllWarehousesCars() throws Exception;
 
-    Warehouse saveWarehouse(WarehouseRequest warehouseRequest);
+    Warehouse addWarehouse(WarehouseRequest warehouseRequest);
 
     Warehouse updateWarehouse(Integer id, WarehouseRequest warehouseRequest);
 

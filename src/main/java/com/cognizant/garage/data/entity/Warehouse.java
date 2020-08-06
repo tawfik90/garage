@@ -1,5 +1,8 @@
 package com.cognizant.garage.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,6 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Warehouse {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "warehouse_auto")
@@ -26,6 +30,7 @@ public class Warehouse {
     private String name;
     private String locationLat;
     private String locationLong;
+    @JsonIgnore
     @OneToMany(mappedBy = "warehouseId")
     private List<WarehouseCarLocation> warehouseCarLocations;
 }

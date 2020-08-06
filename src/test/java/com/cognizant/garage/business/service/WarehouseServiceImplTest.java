@@ -4,6 +4,7 @@ import com.cognizant.garage.business.domain.LocationDTO;
 import com.cognizant.garage.business.domain.requests.WarehouseRequest;
 import com.cognizant.garage.business.domain.response.WarehouseResponse;
 import com.cognizant.garage.data.entity.Warehouse;
+import com.cognizant.garage.data.repository.WarehouseCarLocationRepository;
 import com.cognizant.garage.data.repository.WarehouseRepository;
 import com.cognizant.garage.exception.NotFoundException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -29,6 +30,8 @@ public class WarehouseServiceImplTest {
 
     @Mock
     private WarehouseRepository warehouseRepository;
+    @Mock
+    WarehouseCarLocationRepository warehouseCarLocationRepository;
 
     private JacksonTester<List<WarehouseResponse>> wrListJacksonTester;
 
@@ -36,17 +39,7 @@ public class WarehouseServiceImplTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         JacksonTester.initFields(this, new ObjectMapper());
-        warehouseService = new WarehouseServiceImpl(warehouseRepository);
-    }
-
-    @Test
-    public void getAllWarehousesCars_ShouldReturnListOfCarsWrappedByWarehouse() throws Exception  {
-        InputStream inputStream = TypeReference.class.getResourceAsStream("/json/mockData.json");
-        List<WarehouseResponse> warehouseResponses = wrListJacksonTester.readObject(inputStream);
-
-        List<WarehouseResponse> output = warehouseService.getAllWarehousesCars();
-
-        assertThat(output).isEqualTo(warehouseResponses);
+        warehouseService = new WarehouseServiceImpl(warehouseRepository, warehouseCarLocationRepository);
     }
 
     @Test
@@ -59,7 +52,7 @@ public class WarehouseServiceImplTest {
                 .build();
         given(warehouseRepository.save(any(Warehouse.class))).willReturn(warehouse);
 
-        Warehouse result = warehouseService.saveWarehouse(warehouseRequest);
+        Warehouse result = warehouseService.addWarehouse(warehouseRequest);
 
         verify(warehouseRepository).save(any(Warehouse.class));
         assertThat(result).isEqualTo(warehouse);
@@ -96,8 +89,10 @@ public class WarehouseServiceImplTest {
     public void deleteWarehouse() throws Exception {
         Integer id = 1;
 
+        given(warehouseRepository.findById(id)).willReturn(Optional.of(new Warehouse(1, "test", "23", "2323", null)));
+
         warehouseService.deleteWarehouse(id);
 
-        verify(warehouseRepository).deleteById(id);
+        verify(warehouseRepository).delete(new Warehouse(1, "test", "23", "2323", null));
     }
 }

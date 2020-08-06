@@ -1,6 +1,7 @@
 package com.cognizant.garage.web.exception;
 
 import com.cognizant.garage.exception.NotFoundException;
+import com.cognizant.garage.exception.UnexpectedMoveException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,5 +15,11 @@ public class GlobalRestException {
     public ResponseEntity notFoundHandler(Exception e) {
         log.error("Id not found");
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ExceptionResponse(e.getMessage(), HttpStatus.NOT_FOUND.value()));
+    }
+
+    @ExceptionHandler(UnexpectedMoveException.class)
+    public ResponseEntity unexpectedMoveHandler(Exception e) {
+        log.error("Unexpected move exception");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ExceptionResponse(e.getMessage(), HttpStatus.BAD_REQUEST.value()));
     }
 }

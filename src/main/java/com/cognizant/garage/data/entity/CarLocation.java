@@ -1,5 +1,8 @@
 package com.cognizant.garage.data.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreType;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,7 +27,7 @@ public class CarLocation {
     private Integer id;
     @Column(unique = true)
     private String name;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "carLocationId")
     private List<WarehouseCarLocation> warehouseCarLocations;
 }

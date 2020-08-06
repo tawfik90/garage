@@ -18,7 +18,6 @@ import lombok.ToString;
 @Builder
 public class VehicleDTO {
 
-    final private Integer _id;
     final private String make;
     final private String model;
     @JsonProperty(value = "year_model")
