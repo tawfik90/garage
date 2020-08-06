@@ -1,7 +1,6 @@
 package com.cognizant.garage.business.domain.requests;
 
 import com.cognizant.garage.business.domain.VehicleDTO;
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
