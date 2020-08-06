@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface WarehouseService {
 
-    List<WarehouseResponse> getAllWarehousesCars();
+    List<WarehouseResponse> getAllWarehousesCars() throws Exception;
 
 }

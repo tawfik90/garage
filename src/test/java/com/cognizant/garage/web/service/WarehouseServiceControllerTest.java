@@ -43,13 +43,13 @@ public class WarehouseServiceControllerTest {
     }
 
     @Test
-    public void getGars_shouldReturnStatusOk() throws Exception {
+    public void getAllWarehousesCars_shouldReturnStatusOk() throws Exception {
         InputStream inputStream = TypeReference.class.getResourceAsStream("/json/mockData.json");
         List<WarehouseResponse> warehouseResponseList = warehouseJacksonTester.readObject(inputStream);
         given(warehouseService.getAllWarehousesCars()).willReturn(warehouseResponseList);
 
         MockHttpServletResponse response = mvc.perform(
-                get("/warehouses")
+                get("/warehouses/cars")
                         .accept(MediaType.APPLICATION_JSON))
                 .andReturn()
                 .getResponse();
