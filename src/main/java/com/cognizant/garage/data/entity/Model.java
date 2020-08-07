@@ -25,7 +25,6 @@ public class Model {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "model_auto")
     private Integer id;
-    @Column(unique = true)
     private String name;
     @JsonIgnore
     @OneToMany(mappedBy = "modelId")

@@ -71,14 +71,12 @@ public class VehicleServiceImpl implements VehicleService {
                 .equals(vehicleRequest.getLocation())) {
             throw new UnexpectedMoveException("You can't move car from place to another this API don't support this move yet");
         }
-        return vehicleRepository.save(Vehicle.builder()
-                .id(vehicleId)
-                .modelId(loadModel(vehicleRequest.getModel()))
-                .makeId(loadMake(vehicleRequest.getMake()))
-                .yearModel(vehicleRequest.getYearModel())
-                .licensed(vehicleRequest.getLicensed())
-                .price(vehicleRequest.getPrice())
-                .build());
+        vehicle.setLicensed(vehicleRequest.getLicensed());
+        vehicle.setMakeId(loadMake(vehicleRequest.getMake()));
+        vehicle.setModelId(loadModel(vehicleRequest.getModel()));
+        vehicle.setPrice(vehicleRequest.getPrice());
+        vehicle.setYearModel(vehicleRequest.getYearModel());
+        return vehicleRepository.save(vehicle);
     }
 
     @Override

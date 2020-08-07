@@ -25,7 +25,6 @@ public class Make {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "make_auto")
     private Integer id;
-    @Column(unique = true)
     private String name;
     @JsonIgnore
     @OneToMany(mappedBy = "makeId")

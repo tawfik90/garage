@@ -25,7 +25,6 @@ public class CarLocation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "car_location_auto")
     private Integer id;
-    @Column(unique = true)
     private String name;
     @JsonIgnore
     @OneToMany(mappedBy = "carLocationId")

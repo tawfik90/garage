@@ -26,7 +26,7 @@ public class Warehouse {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "warehouse_auto")
     private Integer id;
-    @Column(unique = true)
+
     private String name;
     private String locationLat;
     private String locationLong;

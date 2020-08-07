@@ -70,13 +70,12 @@ public class WarehouseServiceImpl implements WarehouseService {
 
     @Override
     public Warehouse updateWarehouse(Integer id, WarehouseRequest warehouseRequest) {
-        warehouseRepository.findById(id).orElseThrow(() -> new NotFoundException("This warehouse is not found"));
-        return warehouseRepository.save(Warehouse.builder()
-                .id(id)
-                .name(warehouseRequest.getName())
-                .locationLat(warehouseRequest.getLocation().getLatitude())
-                .locationLong(warehouseRequest.getLocation().getLongitude())
-                .build());
+        Warehouse warehouse = warehouseRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("This warehouse is not found"));
+        warehouse.setName(warehouseRequest.getName());
+        warehouse.setLocationLat(warehouseRequest.getLocation().getLatitude());
+        warehouse.setLocationLong(warehouseRequest.getLocation().getLongitude());
+        return warehouseRepository.save(warehouse);
     }
 
     @Override
