@@ -29,6 +29,7 @@ my structure
    
 ### Assumptions:
 1- The requirements and data modelling of the get API used to “list all available cars in Frank’s car” in phase one are derived from the Mock JSON: https://api.jsonbin.io/b/5ebe673947a2266b1478d892
+
 2- Based on the statement “You need to write the Back-End API code”, it is assumed that the “frontend” within the followed statement “Unit test coverage for both frontend and backend” was not indented to cover front-end requirement.
 
 
@@ -69,6 +70,7 @@ After running the application you can access the API Documentation through this 
 * Spring
 * Lombok
 * SwaggerUI
+* H2
   
 Thanks,
 
