@@ -9,12 +9,10 @@ import com.cognizant.garage.data.entity.Warehouse;
 import com.cognizant.garage.data.entity.WarehouseCarLocation;
 import com.cognizant.garage.data.repository.WarehouseCarLocationRepository;
 import com.cognizant.garage.data.repository.WarehouseRepository;
+import com.cognizant.garage.exception.AlreadyInUseException;
 import com.cognizant.garage.exception.NotFoundException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -80,7 +78,11 @@ public class WarehouseServiceImpl implements WarehouseService {
 
     @Override
     public void deleteWarehouse(Integer id) {
-        warehouseRepository.delete(warehouseRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("This warehouse is not found")));
+        Warehouse warehouse = warehouseRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("This warehouse is not found"));
+        if (warehouse.getWarehouseCarLocations().size() > 0) {
+            throw new AlreadyInUseException("You can't delete, this warehouse already in use");
+        }
+        warehouseRepository.delete(warehouse);
     }
 }

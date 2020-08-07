@@ -1,5 +1,6 @@
 package com.cognizant.garage.web.exception;
 
+import com.cognizant.garage.exception.AlreadyInUseException;
 import com.cognizant.garage.exception.NotFoundException;
 import com.cognizant.garage.exception.UnexpectedMoveException;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +20,12 @@ public class GlobalRestException {
 
     @ExceptionHandler(UnexpectedMoveException.class)
     public ResponseEntity unexpectedMoveHandler(Exception e) {
+        log.error("Unexpected move exception");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ExceptionResponse(e.getMessage(), HttpStatus.BAD_REQUEST.value()));
+    }
+
+    @ExceptionHandler(AlreadyInUseException.class)
+    public ResponseEntity alreadyInUseHandler(Exception e) {
         log.error("Unexpected move exception");
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ExceptionResponse(e.getMessage(), HttpStatus.BAD_REQUEST.value()));
     }

@@ -1,6 +1,7 @@
 package com.cognizant.garage.web.service;
 
 import com.cognizant.garage.business.service.MetricService;
+import com.cognizant.garage.data.repository.VehicleRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 public class MetricServiceControllerTest {
     @Autowired
     private MetricService metricService;
+
+    @Autowired
+    private VehicleRepository vehicleRepository;
 
     @Autowired
     private MockMvc mvc;
