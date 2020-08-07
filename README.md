@@ -1,7 +1,9 @@
 # COGNIZANT Assignment
 Hello everyone,
 
-I created this app for a demo, it is not full project because of my time but really I enjoyed it
+I created this app for a demo, it is not full project because of my time but really I enjoyed it.
+
+Note: The time is really problem because I couldn't finish it in 4 hours, it takes 6 hours at least to finish and test it.
 
 ## Intro
 this application represents a store for set of vehicles. 
